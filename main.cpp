@@ -105,20 +105,25 @@ std::vector< std::vector<int> > CreatePath( std::vector<Point> pointsOfP, std::v
             }
         }
 
-        for( int i = 0; i < q+1; i++ ){
-            for( int j = 0; j < p+1; j++ ){
-                std::cout << std::setw(12) << costMatrix[i][j];
-            }
-            std::cout << std::endl;
-        }
-
         std::vector< std::vector<int> > triangles( p+q, std::vector<int>(3) );
 
         int row = q;
         int col = p;
 
         for( int i = 0; i < p + q; i++ ){
-            if( costMatrix[row-1][col] < costMatrix[row][col-1] ){
+            if( row == 0 ){
+                triangles[i][0] = row % q + p;
+                triangles[i][1] = (col-1+s)%p;
+                triangles[i][2] = (col+s)%p;
+                col = col-1;
+            }
+            else if( col == 0 ){
+                triangles[i][0] = (col+s) % p;
+                triangles[i][1] = (row-1) + p;
+                triangles[i][2] = row % q + p;
+                row = row-1;
+            }
+            else if( costMatrix[row-1][col] < costMatrix[row][col-1] ){
                 triangles[i][0] = (col+s) % p;
                 triangles[i][1] = (row-1) + p;
                 triangles[i][2] = row % q + p;
@@ -196,7 +201,7 @@ int main() {
     std::vector< std::vector<int> > triangles = CreatePath( pointsOfP, pointsOfQ, bestIndex );
 
     for( int i = 0; i < allPoints.size(); i ++ ){
-        std::cout << triangles[i][0]+1 << std::setw(12) << triangles[i][1]+1 << std::setw(12) << triangles[i][2]+1 << std::endl;
+        std::cout << std::setw(3) << triangles[i][0]+1 << std::setw(6) << triangles[i][1]+1 << std::setw(6) << triangles[i][2]+1 << std::endl;
     }
 
     return 0;
