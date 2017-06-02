@@ -150,7 +150,7 @@ int main() {
     std::cin >> numPointsP;
     std::cin >> numPointsQ;
 
-    std::vector<Point> allPoints;
+//    std::vector<Point> allPoints;
 
     std::vector<Point> pointsOfP;
     for( int i = 0; i < numPointsP; i++){
@@ -158,7 +158,7 @@ int main() {
         std::cin >> y;
         std::cin >> z;
         pointsOfP.push_back( Point( x, y, z ) );
-        allPoints.push_back( Point( x, y, z ) );
+//        allPoints.push_back( Point( x, y, z ) );
     }
 
     std::vector<Point> pointsOfQ;
@@ -167,10 +167,10 @@ int main() {
         std::cin >> y;
         std::cin >> z;
         pointsOfQ.push_back( Point( x, y, z ) );
-        allPoints.push_back( Point( x, y, z ) );
+//        allPoints.push_back( Point( x, y, z ) );
     }
 
-        std::cout.precision(4);
+/*        std::cout.precision(4);
         double knownCost = 0;
         int a = 0;
         int b = 0;
@@ -182,7 +182,7 @@ int main() {
 
             knownCost = knownCost + areaOf( allPoints[a-1],allPoints[b-1],allPoints[c-1] );
         }
-
+*/
     double minCost = std::numeric_limits<double>::max();
     double newCost = 0;
     int bestIndex = 0;
@@ -194,13 +194,13 @@ int main() {
         }
     }
 
-    std::cout << minCost << std::endl << bestIndex << std:: endl;
+//    std::cout << minCost << std::endl << bestIndex << std:: endl;
 
-    std::cout << knownCost << std::endl;
+//    std::cout << knownCost << std::endl;
 
     std::vector< std::vector<int> > triangles = CreatePath( pointsOfP, pointsOfQ, bestIndex );
 
-    for( int i = 0; i < allPoints.size(); i ++ ){
+    for( int i = 0; i < numPointsP + numPointsQ; i ++ ){
         std::cout << std::setw(3) << triangles[i][0]+1 << std::setw(6) << triangles[i][1]+1 << std::setw(6) << triangles[i][2]+1 << std::endl;
     }
 
