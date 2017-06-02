@@ -114,14 +114,21 @@ std::vector< std::vector<int> > CreatePath( std::vector<Point> pointsOfP, std::v
 
         std::vector< std::vector<int> > triangles( p+q, std::vector<int>(3) );
 
-        for( int i = 0; i < numRows + numColumns -2; i++ ){
-            if( costMatrix[q-1][p] < costMatrix[q][p-1] ){
-                triangles[i][0] = q+numColumns-2; triangles[i][1] = (p+s)%(numColumns-1); triangles[i][2] = q-3+numColumns;
-                q = q-1;
+        int row = q;
+        int col = p;
+
+        for( int i = 0; i < p + q; i++ ){
+            if( costMatrix[row-1][col] < costMatrix[row][col-1] ){
+                triangles[i][0] = (col+s) % p;
+                triangles[i][1] = (row-1) + p;
+                triangles[i][2] = row % q + p;
+                row = row-1;
             }
             else{
-                triangles[i][0] = (p+s)%(numColumns-1); triangles[i][1] = q+numColumns-2; triangles[i][2] = (p-1+s)%(numColumns-1);
-                p = p-1;
+                triangles[i][0] = row % q + p;
+                triangles[i][1] = (col-1+s)%p;
+                triangles[i][2] = (col+s)%p;
+                col = col-1;
             }
         }
         return triangles;
