@@ -1,6 +1,6 @@
 // Alexander Bauer
-// CS 130B Programming Assignment 1
-// Last Edited: 4/24/2017
+// CS 130B Programming Assignment 3
+// Last Edited: 6/02/17
 
 #include <string>   /* std::string */
 #include <math.h> /* sqrt */
